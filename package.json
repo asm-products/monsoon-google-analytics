@@ -4,6 +4,7 @@
   "description": "An ASM Monsoon adapter for Google Analytics",
   "main": "index.js",
   "scripts": {
+    "postinstall": "node_modules/.bin/sequelize db:migrate",
     "start": "node index.js",
     "test": "mocha --recursive",
     "worker": "node ./lib/scheduler.js"
