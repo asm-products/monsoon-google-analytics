@@ -16,7 +16,7 @@ subscribers.route(route)
   });
 })
 .post(function subscribersPOST(req, res, next) {
-  var subscriber = Subscriber.create(req.body)
+  Subscriber.create(req.body)
   .then(function(s) {
     res.status(201).json(s);
   })
@@ -24,6 +24,22 @@ subscribers.route(route)
     console.error('Subscriber failed to save.');
     res.status(400).json(err);
   });
+});
+
+var instanceRoute = '/products/:product/subscribers/:subscriber';
+
+subscribers.use(instanceRoute, authorization);
+
+subscribers.route(instanceRoute)
+.delete(function subscribersDELETE(req, res, next) {
+  Subscriber.destroy(req.params.subscriber)
+  .then(function(s) {
+    res.status(204);
+  })
+  .catch(function(err) {
+    console.error('Failed to destroy row');
+    res.status(500).json(err);
+  })
 });
 
 module.exports = subscribers;
