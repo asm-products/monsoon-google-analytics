@@ -16,12 +16,18 @@ subscribers.route(route)
   });
 })
 .post(function subscribersPOST(req, res, next) {
-  Subscriber.create(req.body)
+  Subscriber.findOrCreate({
+    where: {
+      product: req.params.product
+    },
+    defaults: req.body
+  })
   .then(function(s) {
     res.status(201).json(s);
   })
   .catch(function(err) {
     console.error('Subscriber failed to save.');
+    console.log(err);
     res.status(400).json(err);
   });
 });

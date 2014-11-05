@@ -8,25 +8,19 @@ module.exports = function(sequelize, DataTypes) {
     sent_at: DataTypes.DATE,
     deleted_at: DataTypes.DATE,
     endpoint: {
-      type: DataTypes.STRING,
-      validate: {
-        notNull: true
-      }
+      type: DataTypes.STRING
     },
     product: {
-      type: DataTypes.STRING,
-      validate: {
-        notNull: true
-      }
+      type: DataTypes.STRING
     },
     access_token: {
-      type: DataTypes.STRING,
-      validate: {
-        notNull: true
-      }
+      type: DataTypes.STRING
     },
     refresh_token: DataTypes.STRING,
-    token_type: DataTypes.STRING
+    token_type: DataTypes.STRING,
+    account_name: DataTypes.STRING,
+    property_name: DataTypes.STRING,
+    profile_name: DataTypes.STRING
   }, {
     underscored: true,
     tableName: 'subscribers',
